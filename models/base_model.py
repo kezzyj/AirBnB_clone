@@ -11,6 +11,7 @@ import models
 from uuid import uuid4, UUID
 from datetime import datetime
 
+date_format = "%Y-%m-%dT%H:%M:%S.%f"
 
 class BaseModel:
 
@@ -23,22 +24,32 @@ def __init__(self, *args, **kwargs):
         """
             instantiation of new BaseModel Class
         """
+        from models import storage
 
         if kwargs:
 
-            self.__set_attributes(kwargs)
+            for key, value in kwargs.items():
+                if key != "__class__":
+                    setattr(self, key, value)
+            if hasattr(self, "created_at") and type(self.created_at) is str:
+                self.created_at = datetime.strptime(kwargs["created_at"], date_format)
+            if hasattr(self, "updated_at") and type(self.updated_at) is str:
+                self.created_at = datetime.strptime(kwargs["updated_at"], date_format)
 
         else:
 
             self.id = str(uuid4())
             self.created_at = datetime.utcnow()
             self.updated_at = datetime.utcnow()
+            storage.new(self)
 
 def save(self):
     """
         updates attribute updated_at to current time
     """
+       from models import storage
     self.updated_at = datetime.utcnow()
+    storage.save()
 
 def __str__(self):
 
@@ -51,3 +62,15 @@ def __str__(self):
         class_name = type(self).__name__
 
         return '[{}] ({}) {}'.format(class_name, self.id, self.__dict__)
+
+def to_dict(self):
+     """
+       return a dictionary containing all the key/value 
+       of __dict__ instance
+
+    """
+    new_dict = self.__dict__.copy()
+    new_dict["__class__"] = self.__class__.name
+    new_dict["created_at"] = datetime.isoformat(self.created_at)
+    new_dict["updated_at"] = datetime.isoformat(self.updated_at)
+    return new_dict
