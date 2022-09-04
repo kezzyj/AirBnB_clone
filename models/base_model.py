@@ -24,32 +24,17 @@ def __init__(self, *args, **kwargs):
         """
             instantiation of new BaseModel Class
         """
-        from models import storage
 
-        if kwargs:
-
-            for key, value in kwargs.items():
-                if key != "__class__":
-                    setattr(self, key, value)
-            if hasattr(self, "created_at") and type(self.created_at) is str:
-                self.created_at = datetime.strptime(kwargs["created_at"], date_format)
-            if hasattr(self, "updated_at") and type(self.updated_at) is str:
-                self.created_at = datetime.strptime(kwargs["updated_at"], date_format)
-
-        else:
-
-            self.id = str(uuid4())
-            self.created_at = datetime.utcnow()
-            self.updated_at = datetime.utcnow()
-            storage.new(self)
+        self.id = str(uuid4())
+        self.created_at = datetime.utcnow()
+        self.updated_at = datetime.utcnow()
 
 def save(self):
     """
         updates attribute updated_at to current time
     """
-       from models import storage
+
     self.updated_at = datetime.utcnow()
-    storage.save()
 
 def __str__(self):
 
@@ -60,7 +45,6 @@ def __str__(self):
         """
 
         class_name = type(self).__name__
-
         return '[{}] ({}) {}'.format(class_name, self.id, self.__dict__)
 
 def to_dict(self):
