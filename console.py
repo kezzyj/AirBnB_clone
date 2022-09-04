@@ -13,7 +13,6 @@ from models import storage, CNC
 
 
 
-
 class HBNBCommand(cmd.Cmd):
 
     """
