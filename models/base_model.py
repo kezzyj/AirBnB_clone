@@ -1,4 +1,3 @@
-
 #!/usr/bin/python3
 
 """
@@ -6,7 +5,6 @@
 BaseModel Class of Models Module
 
 """
-
 
 
 import os
