@@ -64,15 +64,15 @@ class BaseModel:
 
         """
 
-        rdict = self.__dict__.copy()
+        n_dict = self.__dict__.copy()
 
-        rdict["created_at"] = self.created_at.isoformat()
+        n_dict["created_at"] = self.created_at.isoformat()
 
-        rdict["updated_at"] = self.updated_at.isoformat()
+        n_dict["updated_at"] = self.updated_at.isoformat()
 
-        rdict["__class__"] = self.__class__.__name__
+        n_dict["__class__"] = self.__class__.__name__
 
-        return rdict
+        return (n_dict)
 
 
 
