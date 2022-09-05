@@ -1,62 +1,25 @@
 #!/usr/bin/python3
 
-"""
+"""Defines the State class."""
 
-State Class from Models Module
-
-"""
-
-import os
-
-import models
-
-from models.base_model import BaseModel, Base
-
-from sqlalchemy.orm import relationship
-
-from sqlalchemy import Column, Integer, String, Float
-
-STORAGE_TYPE = os.environ.get('HBNB_TYPE_STORAGE')
+from models.base_model import BaseModel
 
 
 
 
 
-class State(BaseModel, Base):
+class State(BaseModel):
 
-    """State class handles all application states"""
+    """Represent a state.
 
-    if STORAGE_TYPE == "db":
+    
 
-        __tablename__ = 'states'
+    Attributes:
 
-        name = Column(String(128), nullable=False)
+        name (str): The name of the state.
 
-        cities = relationship('City', backref='state', cascade='delete')
-
-    else:
-
-        name = ''
+    """
 
 
 
-        @property
-
-        def cities(self):
-
-            """
-
-                getter method, returns list of City objs from storage
-
-                linked to the current State
-
-            """
-
-            city_list = []
-
-            for city in models.storage.all("City").values():
-
-                if city.state_id == self.id:
-
-                    city_list.append(city)
-
+    name = ""
