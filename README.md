@@ -1,4 +1,4 @@
-irBnB clone
+AirBnB clone
 ![](https://s3.amazonaws.com/alx-intranet.hbtn.io/uploads/medias/2018/6/65f4a1dd9c51265f49d0.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIARDDGGGOUSBVO6H7D%2F20220830%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20220830T141322Z&X-Amz-Expires=86400&X-Amz-SignedHeaders=host&X-Amz-Signature=e8d61190bdf04bf73e4ffb5e1b93da92a297af8b89a166bf1fa670c3e18d8c4f)
 
 The goal of the project is to deploy on your server a simple copy of the AirBnB website.
